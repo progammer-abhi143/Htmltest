@@ -1,0 +1,213 @@
+  <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+<style>
+  
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+body {
+    text-align: center;
+    background: linear-gradient(to bottom right,#c70c73,#291520);
+  }
+  
+h1{
+    color: #fff;
+    background-color: red;
+    display: inline-block;
+    text-align: center;
+}
+
+.container{
+   
+   height: 70vh;
+   display: flex;
+   
+   justify-content: center;
+   align-items: center;
+}
+.game{
+  height:60vmin;
+  width: 60vmin;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.box{
+  height: 17vmin;
+  width: 17vmin;
+border-radius: 1rem;
+margin: 4px;
+box-shadow: 0 0 1rem rgba(0, 0, 0, 0.4);
+font-size: 9vmin;
+background-color: blanchedalmond;
+color: #000;
+
+
+}
+
+.clear{
+  height: 52px;
+  width: 92px;
+  border-radius: 9px;
+   border: none;
+
+   background-color: blue;
+   color: white;
+   font-size: 1rem;
+   &:hover{
+    background-color: #ccc;
+    color: #000;
+    font-size: 1rem;
+   }
+
+}
+</style>
+</head>
+
+<body>
+    <h1>Tic Tac Toy Game</h1>
+    <div class="container">
+       
+
+
+        <div class="game">
+
+            <button class="box" id="box1"></button>
+            <button class="box" id="box2"></button>
+            <button class="box" id="box3"></button>
+            <button class="box" id="box4"></button>
+            <button class="box" id="box5"></button>
+            <button class="box" id="box6"></button>
+            <button class="box" id="box7"></button>
+            <button class="box" id="box8"></button>
+            <button class="box" id="box9"></button>
+        </div>
+    </div>
+    <button class="clear">Reset</button>
+<script src="Index.js"></script>
+    <script >
+      let box=document.querySelectorAll(".box");
+let reset=document.querySelector(".clear");
+
+
+
+let turnX=true;
+
+
+
+const winpatter=
+[
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+    [0,4,8],
+    [2,4,6]
+
+
+];
+
+box.forEach((boxs) =>
+{
+    boxs.addEventListener("click" ,()=>
+    {
+       if(turnX)
+       {
+        boxs.innerText="X";
+        turnX=false;
+       }
+       else{
+        boxs.innerText="O";
+        turnX=true;
+       }
+        
+       boxs.disabled=true;
+
+       Winner();
+    });
+    
+});
+   
+const resetGame=()=>
+    {
+        turnX=true;
+        enabledd();
+        setTimeout(() => {
+            alert("କାଇଁ  ପାରିବନି😏\n ନା ଭୁଲ ହୋଇଗଲା ❎️ \n ନା ସରିଗଲା 📢" );
+        }, 12);
+      return;
+    };
+
+const disabledd =()=>
+{
+    for( let boxs of box)
+    {
+        boxs.disabled=true;
+    }
+};
+
+const enabledd=()=>
+{
+    for( let boxs of box)
+        {
+            boxs.disabled=false;
+            boxs.innerText="";
+        }
+
+};
+
+
+const Winner =()=>
+{
+    for( let pattern of winpatter)
+    {
+        
+        
+        let pos1=box[pattern[0]].innerText;
+        let pos2=box[pattern[1]].innerText;
+        let pos3=box[pattern[2]].innerText;
+         if(pos1!=""&&pos2!=""&&pos3!="")
+         {
+
+            if(pos1===pos2 && pos2===pos3)
+            {
+                setTimeout(() => {
+                    alert("Winner is: " + pos1);
+                }, 13);
+                
+                disabledd();
+                enabledd();
+                
+                
+                return;
+            }
+           
+         }
+         
+
+
+    }
+
+};
+
+
+reset.addEventListener("click",resetGame);
+    </script>
+</body>
+
+</html>
+  
